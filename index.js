@@ -12,6 +12,7 @@ let result
 let numberOne 
 let numberTwo  
 let firstNumbertFlag = false
+let historyArray = [];
 function buttonClick(text) {
   // console.log("Clicking", text);
   if(typeof text === "number"){
@@ -28,20 +29,42 @@ function buttonClick(text) {
   }else{
     if(text === "AC")
     printOnConsole("")
-    if(text === '+' || text === '÷'|| text === '*'||text === '-'){ 
+    if(text === '+' || text === '÷'|| text === 'x'||text === '-' || text === '%'){ 
     op = text
     firstNumbertFlag = true
     printOnConsole(text)
     }
     
-    //switch logic
-    if(text === '='){
-      if(op === '+'){
-      result = numberTwo + numberOne;
-      printOnConsole(result);
-      }
+  if (text === "="){
+    switch (op){
+      case '+':
+        result = numberOne + numberTwo;
+        break;
+      
+      case '-':
+        result = numberOne - numberTwo;
+        break;
+      case 'x':
+        result = numberOne * numberTwo;
+        break;
+      case '÷':
+        result = numberOne / numberTwo;
+      case '%':
+        result = numberOne % numberTwo;
+        break;
+
+      break;
     }
+    printOnConsole(result);
+
+    historyArray.push(`${numberOne} ${op} ${numberTwo} = ${result} `)
+
+    updateHistory(historyArray);
+
+    
   }
+  }
+  
   }
 
 
