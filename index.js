@@ -7,18 +7,37 @@
  * If you click on button +, the text will be "+"
  * ,... and so on
  */
-
-let numOne 
-let numTwo 
 let op
-const numberlist = [1,2,3,4,5,6,7,8,9,0];
+let result
+let numberOne, numberTwo; 
+let firstNumbertFlag = false
 function buttonClick(text) {
   // console.log("Clicking", text);
- if (numberlist.includes(text)){
-  printOnConsole(text);
-}else{
+  if(typeof text === "number"){
+    if (firstNumbertFlag){
+    firstNumbertFlag = false
+    numberTwo = text;
+    }
+    else{
+      numberOne = text;
+    }
+    printOnConsole(text)
+  }else{
+    if(text === "AC")
+    printOnConsole("")
+    if(text === '+' || text === '÷'|| text === '*'||text === '-'){ 
+    op = text
+    firstNumbertFlag = true
+    printOnConsole(text)
 
-}
+    if(text === '='){
+      if(op === '+'){
+      result = numberTwo + numberOne;
+      printOnConsole(result);
+      }
+    }
+  }
+  }
 }
 
 /** Supporting functions
