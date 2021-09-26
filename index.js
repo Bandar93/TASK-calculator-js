@@ -9,19 +9,22 @@
  */
 let op
 let result
-let numberOne, numberTwo; 
+let numberOne 
+let numberTwo  
 let firstNumbertFlag = false
 function buttonClick(text) {
   // console.log("Clicking", text);
   if(typeof text === "number"){
     if (firstNumbertFlag){
-    firstNumbertFlag = false
     numberTwo = text;
+    firstNumbertFlag = false
+    printOnConsole(numberTwo)
     }
     else{
       numberOne = text;
+      printOnConsole(numberOne)
     }
-    printOnConsole(text)
+    
   }else{
     if(text === "AC")
     printOnConsole("")
@@ -29,7 +32,9 @@ function buttonClick(text) {
     op = text
     firstNumbertFlag = true
     printOnConsole(text)
-
+    }
+    
+    //switch logic
     if(text === '='){
       if(op === '+'){
       result = numberTwo + numberOne;
@@ -38,7 +43,7 @@ function buttonClick(text) {
     }
   }
   }
-}
+
 
 /** Supporting functions
  * 1. `printOnConsole(text)`, takes any text, and renders the console part of the web page
