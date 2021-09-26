@@ -7,66 +7,65 @@
  * If you click on button +, the text will be "+"
  * ,... and so on
  */
-let op
-let result
-let numberOne 
-let numberTwo  
-let firstNumbertFlag = false
+let op;
+let result;
+let numberOne;
+let numberTwo;
+let firstNumbertFlag = false;
 let historyArray = [];
 function buttonClick(text) {
   // console.log("Clicking", text);
-  if(typeof text === "number"){
-    if (firstNumbertFlag){
-    numberTwo = text;
-    firstNumbertFlag = false
-    printOnConsole(numberTwo)
-    }
-    else{
+  if (typeof text === "number") {
+    if (firstNumbertFlag) {
+      numberTwo = text;
+      firstNumbertFlag = false;
+      printOnConsole(numberTwo);
+    } else {
       numberOne = text;
-      printOnConsole(numberOne)
+      printOnConsole(numberOne);
     }
-    
-  }else{
-    if(text === "AC")
-    printOnConsole("")
-    if(text === '+' || text === '÷'|| text === 'x'||text === '-' || text === '%'){ 
-    op = text
-    firstNumbertFlag = true
-    printOnConsole(text)
+  } else {
+    if (text === "AC") printOnConsole("");
+    if (
+      text === "+" ||
+      text === "÷" ||
+      text === "x" ||
+      text === "-" ||
+      text === "%"
+    ) {
+      op = text;
+      firstNumbertFlag = true;
+      printOnConsole(text);
     }
-    
-  if (text === "="){
-    switch (op){
-      case '+':
-        result = numberOne + numberTwo;
-        break;
-      
-      case '-':
-        result = numberOne - numberTwo;
-        break;
-      case 'x':
-        result = numberOne * numberTwo;
-        break;
-      case '÷':
-        result = numberOne / numberTwo;
-      case '%':
-        result = numberOne % numberTwo;
-        break;
 
-      break;
+    if (text === "=") {
+      switch (op) {
+        case "+":
+          result = numberOne + numberTwo;
+          break;
+
+        case "-":
+          result = numberOne - numberTwo;
+          break;
+        case "x":
+          result = numberOne * numberTwo;
+          break;
+        case "÷":
+          result = numberOne / numberTwo;
+        case "%":
+          result = numberOne % numberTwo;
+          break;
+
+          break;
+      }
+      printOnConsole(result);
+
+      historyArray.push(`${numberOne} ${op} ${numberTwo} = ${result} `);
+
+      updateHistory(historyArray);
     }
-    printOnConsole(result);
-
-    historyArray.push(`${numberOne} ${op} ${numberTwo} = ${result} `)
-
-    updateHistory(historyArray);
-
-    
   }
-  }
-  
-  }
-
+}
 
 /** Supporting functions
  * 1. `printOnConsole(text)`, takes any text, and renders the console part of the web page
