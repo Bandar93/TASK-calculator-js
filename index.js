@@ -7,65 +7,87 @@
  * If you click on button +, the text will be "+"
  * ,... and so on
  */
-let op;
-let result;
-let numberOne;
-let numberTwo;
-let firstNumbertFlag = false;
+let operation;
+let numberOne, numberTwo;
+let numberOneString = '';
+let numberTwoString = '';
+let firstNumberDoneFlag = false;
 let historyArray = [];
 function buttonClick(text) {
   // console.log("Clicking", text);
   if (typeof text === "number") {
-    if (firstNumbertFlag) {
-      numberTwo = text;
-      firstNumbertFlag = false;
-      printOnConsole(numberTwo);
+    if (firstNumberDoneFlag) {
+      numberTwoString += text;
+      printOnConsole(numberTwoString);
     } else {
-      numberOne = text;
-      printOnConsole(numberOne);
+      numberOneString += text;
+      printOnConsole(numberOneString);
     }
-  } else {
-    if (text === "AC") printOnConsole("");
-    if (
-      text === "+" ||
-      text === "÷" ||
-      text === "x" ||
-      text === "-" ||
-      text === "%"
-    ) {
-      op = text;
-      firstNumbertFlag = true;
-      printOnConsole(text);
-    }
+  }
+    
+  if (text === "AC") {
+    printOnConsole("");
+    historyArray = []
+    updateHistory(historyArray);
+    numberOneString = '';
+    numberTwoString = '';
+    firstNumberDoneFlag = false
+  }
+    
+  if ((
+    text === "+" ||
+    text === "÷" ||
+    text === "x" ||
+    text === "-" ||
+    text === "%")
+  ) {
+    operation = text;
+    firstNumberDoneFlag = true;
+    printOnConsole("");
+  }
 
-    if (text === "=") {
-      switch (op) {
-        case "+":
-          result = numberOne + numberTwo;
-          break;
-
-        case "-":
-          result = numberOne - numberTwo;
-          break;
-        case "x":
-          result = numberOne * numberTwo;
-          break;
-        case "÷":
-          result = numberOne / numberTwo;
-        case "%":
-          result = numberOne % numberTwo;
-          break;
-
-          break;
-      }
+  if (text === "=") {
+    numberOne = parseInt(numberOneString)
+    numberTwo = parseInt(numberTwoString)
+    if (isNaN(numberOne) === true || isNaN(numberTwo) === true) {
+      printOnConsole("Error: Bad Operation");
+    } else {
+      result = calculateNumbers(numberOne, numberTwo, operation)
       printOnConsole(result);
-
-      historyArray.push(`${numberOne} ${op} ${numberTwo} = ${result} `);
+      
+      historyArray.push(`${numberOne} ${operation} ${numberTwo} = ${result} `);
 
       updateHistory(historyArray);
     }
+    firstNumberDoneFlag = false
+    numberOneString = '';
+    numberTwoString = '';
+  
   }
 }
+  function calculateNumbers(numberOne, numberTwo, operation) {
+    switch (operation) {
+      case "+":
+        result = numberOne + numberTwo;
+        break;
+
+      case "-":
+        result = numberOne - numberTwo;
+        break;
+      case "x":
+        result = numberOne * numberTwo;
+        break;
+      case "÷":
+        result = numberOne / numberTwo;
+        break;
+      case "%":
+        result = numberOne % numberTwo;
+        break;
+    }
+    return result
+  }
+
+
 
 /** Supporting functions
  * 1. `printOnConsole(text)`, takes any text, and renders the console part of the web page
